@@ -581,4 +581,13 @@ Public Class FormProduksiHitungManagement
             End If
         End If
     End Sub
+
+    Private Sub txtQtyKlemPantek_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtQtyKlemPantek.KeyPress
+        If Asc(e.KeyChar) <> Asc("-") And AscW(e.KeyChar) <> 13 And AscW(e.KeyChar) <> 8 And (Asc(e.KeyChar) < Asc("0") Or Asc(e.KeyChar) > Asc("9")) Then
+            e.KeyChar = Nothing
+        End If
+        If AscW(e.KeyChar) = 13 And txtQtyKlemPantek.Text <> "" Then
+            btnAdd_Click(Nothing, Nothing)
+        End If
+    End Sub
 End Class

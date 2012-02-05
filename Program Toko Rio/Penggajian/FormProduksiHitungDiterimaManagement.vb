@@ -9,6 +9,10 @@ Public Class FormProduksiHitungDiterimaManagement
     Dim IsiMerk = 0
     Dim IsiMerkPrioritas = 0
     Dim KdMerkPrioritas = ""
+    Dim perkiraan = ""
+    Dim QtyKlemFormula = 0
+    Dim QtyKlemJadiFormula = 0
+    Dim QtyPakuFormula = 0
 
     Private Sub msgWarning(ByVal str As String)
         MsgBox(str, MsgBoxStyle.Critical, "Warning")
@@ -63,18 +67,30 @@ Public Class FormProduksiHitungDiterimaManagement
             cmbKdHitung.Text = KdHitung
 
             Dim readerKlemJadi = execute_reader(" Select klem.KdBarang 'KdKlemJadi', klem.NamaBarang 'NamaKlemJadi', " & _
-                                                " klem.Ukuran 'UkuranKlem', sum(QtyKlemJadi) QtyKlemJadi, " & _
+                                                " klem.Ukuran 'UkuranKlem', sum(hitung.QtyKlemJadi) QtyKlemJadi, " & _
                                                 " HargaModalKlemJadi, Merk, mm.KdMerk, " & _
-                                                " mm.Isi, QtyKlemPrioritas " & _
+                                                " mm.Isi, QtyKlemPrioritas, " & _
+                                                " IFNULL(mfp.QtyKlemMentah, 0) 'QtyKlemFormula', " & _
+                                                " IFNULL(mfp.QtyKlemJadi, 0) 'QtyKlemJadiFormula', " & _
+                                                " IFNULL(mfp.QtyPaku, 0) 'QtyPakuFormula' " & _
                                                 " from trhitungdetail_diterima hitung " & _
                                                 " Join MsBarang klem On klem.KdBarang = hitung.KdKlemJadi " & _
                                                 " Join msmerk mm On mm.KdMerk = klem.KdMerk " & _
+                                                " LEFT join msformula mfp on mfp.UkuranKlemMentah = klem.Ukuran " & _
+                                                " AND Tipe = 'hitung' " & _
                                                 " where KdHitungDiterima = '" & PK & "' " & _
                                                 " GROUP BY klem.KdBarang " & _
                                                 " order by klem.NamaBarang asc ")
 
             gridKlemJadi.Rows.Clear()
             Do While readerKlemJadi.Read
+                Dim QtyKlemPantek = 0
+                If Val(readerKlemJadi("QtyKlemJadiFormula")) Then
+                    QtyKlemPantek = Val(readerKlemJadi("QtyKlemJadi")) / Val(readerKlemJadi("QtyKlemJadiFormula"))
+                End If
+                Dim QtyKlemMentah = Val(QtyKlemPantek) * Val(readerKlemJadi("QtyKlemFormula"))
+                Dim QtyPaku = Val(QtyKlemPantek) * Val(readerKlemJadi("QtyPakuFormula"))
+
                 gridKlemJadi.Rows.Add()
                 gridKlemJadi.Rows.Item(gridKlemJadi.RowCount - 1).Cells("clmKdKlemJadi").Value = readerKlemJadi("KdKlemJadi")
                 gridKlemJadi.Rows.Item(gridKlemJadi.RowCount - 1).Cells("clmUkuranKlemJadi").Value = readerKlemJadi("NamaKlemJadi")
@@ -84,6 +100,7 @@ Public Class FormProduksiHitungDiterimaManagement
                 gridKlemJadi.Rows.Item(gridKlemJadi.RowCount - 1).Cells("clmHargaModalKlemJadi").Value = readerKlemJadi("HargaModalKlemJadi")
                 gridKlemJadi.Rows.Item(gridKlemJadi.RowCount - 1).Cells("clmQtyKlemJadi").Value = readerKlemJadi("QtyKlemJadi")
                 gridKlemJadi.Rows.Item(gridKlemJadi.RowCount - 1).Cells("clmQtyPrioritas").Value = readerKlemJadi("QtyKlemPrioritas")
+                gridKlemJadi.Rows.Item(gridKlemJadi.RowCount - 1).Cells("clmPerkiraan").Value = QtyKlemMentah.ToString
             Loop
             readerKlemJadi.Close()
         Catch ex As Exception
@@ -336,9 +353,6 @@ Public Class FormProduksiHitungDiterimaManagement
             ElseIf Val(txtQtyKlemJadi.Text) = 0 Then
                 msgInfo("Jumlah klem harus berupa angka dan lebih besar dari 0")
                 txtQtyKlemJadi.Focus()
-            ElseIf Val(txtHarga.Text) = 0 Then
-                msgInfo("Harga modal klem harus berupa angka dan lebih besar dari 0")
-                txtHarga.Focus()
             Else
                 Dim KdKlem = cmbKlemJadi.Text.ToString.Split("~")
                 Dim harga = 0
@@ -349,9 +363,17 @@ Public Class FormProduksiHitungDiterimaManagement
                         Exit Sub
                     End If
                 Next
-                If KdMerkPrioritas <> KdMerk Then
+                If KdMerkPrioritas <> KdMerk And Val(IsiMerkPrioritas) Then
                     QtyPrioritas = (CInt(txtQtyKlemJadi.Text) * CInt(IsiMerk)) / CInt(IsiMerkPrioritas)
                 End If
+
+                Dim QtyKlemHitung = 0
+                If QtyKlemJadiFormula Then
+                    QtyKlemHitung = Val(txtQtyKlemJadi.Text) / QtyKlemJadiFormula
+                End If
+                Dim QtyKlemMentah = Val(QtyKlemHitung) * QtyKlemFormula
+                Dim QtyPaku = Val(QtyKlemHitung) * QtyPakuFormula
+                perkiraan = QtyKlemMentah.ToString
 
                 gridKlemJadi.Rows.Add()
                 gridKlemJadi.Rows.Item(gridKlemJadi.RowCount - 1).Cells("clmKdKlemJadi").Value = Trim(KdKlem(0))
@@ -362,6 +384,7 @@ Public Class FormProduksiHitungDiterimaManagement
                 gridKlemJadi.Rows.Item(gridKlemJadi.RowCount - 1).Cells("clmHargaModalKlemJadi").Value = Val(txtHarga.Text)
                 gridKlemJadi.Rows.Item(gridKlemJadi.RowCount - 1).Cells("clmQtyKlemJadi").Value = CInt(txtQtyKlemJadi.Text)
                 gridKlemJadi.Rows.Item(gridKlemJadi.RowCount - 1).Cells("clmQtyPrioritas").Value = CInt(QtyPrioritas)
+                gridKlemJadi.Rows.Item(gridKlemJadi.RowCount - 1).Cells("clmPerkiraan").Value = perkiraan
                 emptyBarang()
 
                 gridKlemJadi.Focus()
@@ -501,10 +524,19 @@ Public Class FormProduksiHitungDiterimaManagement
     Private Sub cmbKlemJadi_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbKlemJadi.SelectedIndexChanged
         If cmbKlemJadi.SelectedIndex <> 0 Then
             Dim KdKlem = cmbKlemJadi.Text.ToString.Split("~")
-            Dim reader = execute_reader(" SELECT Merk, mm.KdMerk, mm.Isi FROM MsMerk mm " & _
+            Dim reader = execute_reader(" SELECT Merk, mm.KdMerk, mm.Isi, " & _
+                                        " IFNULL(mfp.QtyKlemMentah, 0) 'QtyKlemFormula', " & _
+                                        " IFNULL(mfp.QtyKlemJadi, 0) 'QtyKlemJadiFormula', " & _
+                                        " IFNULL(mfp.QtyPaku, 0) 'QtyPakuFormula' " & _
+                                        " FROM MsMerk mm " & _
                                         " JOIN msbarang mb ON mb.KdMerk = mm.KdMerk " & _
+                                        " LEFT JOIN msformula mfp on mfp.UkuranKlemMentah = mb.Ukuran " & _
+                                        " AND Tipe = 'hitung' " & _
                                         " WHERE mb.KdBarang = '" & KdKlem(0) & "' ")
             If reader.read Then
+                QtyKlemJadiFormula = Val(reader("QtyKlemJadiFormula"))
+                QtyKlemFormula = Val(reader("QtyKlemFormula"))
+                QtyPakuFormula = Val(reader("QtyPakuFormula"))
                 Merk = reader("Merk")
                 KdMerk = reader("KdMerk")
                 IsiMerk = reader("Isi")

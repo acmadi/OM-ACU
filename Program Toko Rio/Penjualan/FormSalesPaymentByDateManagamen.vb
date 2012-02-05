@@ -193,8 +193,10 @@ Public Class FormSalesPaymentByDateManagamen
             cmbSales.Focus()
         Else
             Dim totalPaid = lblJumlahSetelahPotongan.Text.ToString.Replace(".", "").Replace(",", "")
-            Dim KomisiSales = Val(lbl_disc_amount.Text.ToString.Replace(".", "").Replace(",", ""))
+            Dim KomisiSales = Val(txtTotalKomisSales.Text.ToString.Replace(".", "").Replace(",", ""))
+            Dim Potongan = Val(lbl_disc_amount.Text.ToString.Replace(".", "").Replace(",", ""))
             Dim salesID = cmbSales.Text.ToString.Split("-")
+            KomisiSales += Potongan
 
             dbconmanual.Open()
             Dim trans As MySql.Data.MySqlClient.MySqlTransaction

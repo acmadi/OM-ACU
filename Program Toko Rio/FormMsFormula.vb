@@ -95,7 +95,7 @@ Public Class FormMsFormula
         ElseIf cmbUkuran.SelectedIndex = 0 Then
             msgInfo("Silakan pilih ukuran klem mentah")
             cmbUkuran.Focus()
-        ElseIf cmbUkuranPaku.SelectedIndex = 0 Then
+        ElseIf cmbUkuranPaku.SelectedIndex = 0 And cmbTipe.SelectedIndex = 1 Then
             msgInfo("Silakan pilih ukuran paku")
             cmbUkuranPaku.Focus()
         ElseIf Val(txtQtyKlemMentah.Text) = 0 Then

@@ -370,7 +370,7 @@ Public Class FormBahanMentahHistory
         PK = data_carier(0)
         jenis = data_carier(1)
 
-        If jenis = "klem" Then
+        If jenis.ToString.ToLower = "klem" Then
             jml_satuan2 = 30
             nama_satuan2 = "Karung"
             lblSatuan.Text = "/ Karung"
@@ -378,6 +378,9 @@ Public Class FormBahanMentahHistory
             jml_satuan2 = 25
             nama_satuan2 = "Kardus"
             lblSatuan.Text = "/ Kardus"
+            lblKlemSudahPantek.Visible = False
+            txtKlemPantek.Visible = False
+            lblSatuanKlemPantek.Visible = False
         End If
 
         clear_variable_array()

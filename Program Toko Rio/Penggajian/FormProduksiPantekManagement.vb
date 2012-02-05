@@ -58,12 +58,14 @@ Public Class FormProduksiPantekManagement
     Private Sub setData()
         Try
             Dim SelectKaryawan = ""
-            Dim readerPantek = execute_reader(" select KdPantek, DATE_FORMAT(TanggalPantek, '%m/%d/%Y') 'Tanggal', " & _
-                                          " pantek.KdKaryawan, MK.NamaKaryawan, " & _
-                                          " Alamat, MK.NoHP, StatusPantek " & _
-                                          " from trpantek pantek " & _
-                                          " Join mskaryawan MK On MK.KdKaryawan = pantek.KdKaryawan " & _
-                                          " Where KdPantek = '" & PK & "' ")
+
+            sql = " select KdPantek, DATE_FORMAT(TanggalPantek, '%m/%d/%Y') 'Tanggal', " & _
+                  " pantek.KdKaryawan, MK.NamaKaryawan, " & _
+                  " Alamat, MK.NoHP, StatusPantek " & _
+                  " from trpantek pantek " & _
+                  " Join mskaryawan MK On MK.KdKaryawan = pantek.KdKaryawan " & _
+                  " Where KdPantek = '" & PK & "' "
+            Dim readerPantek = execute_reader(sql)
 
             If readerPantek.Read() Then
                 txtKdPantek.Text = readerPantek.Item("KdPantek")

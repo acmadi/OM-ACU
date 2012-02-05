@@ -31,6 +31,8 @@ Partial Class FormTrPOManagementKlemJadi
         Me.dtpPO = New System.Windows.Forms.DateTimePicker
         Me.Label12 = New System.Windows.Forms.Label
         Me.GroupBox3 = New System.Windows.Forms.GroupBox
+        Me.Label2 = New System.Windows.Forms.Label
+        Me.Label7 = New System.Windows.Forms.Label
         Me.Label11 = New System.Windows.Forms.Label
         Me.Label10 = New System.Windows.Forms.Label
         Me.txtHargaBeli = New System.Windows.Forms.TextBox
@@ -54,12 +56,6 @@ Partial Class FormTrPOManagementKlemJadi
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator
         Me.btnExit = New System.Windows.Forms.ToolStripButton
         Me.gridBarang = New System.Windows.Forms.DataGridView
-        Me.clmPartNo = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.clmNamaBarang = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.clmUkuran = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.clmQtyReal = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.clmHargaBeli = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.clmSubtotal = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.txt_jumlah = New System.Windows.Forms.TextBox
         Me.Label25 = New System.Windows.Forms.Label
         Me.txt_disc_faktur = New System.Windows.Forms.TextBox
@@ -67,8 +63,12 @@ Partial Class FormTrPOManagementKlemJadi
         Me.Label23 = New System.Windows.Forms.Label
         Me.lblGrandtotal = New System.Windows.Forms.TextBox
         Me.Label6 = New System.Windows.Forms.Label
-        Me.Label2 = New System.Windows.Forms.Label
-        Me.Label7 = New System.Windows.Forms.Label
+        Me.clmPartNo = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.clmNamaBarang = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.clmUkuran = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.clmQtyReal = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.clmHargaBeli = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.clmSubtotal = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.main_tool_strip.SuspendLayout()
@@ -201,6 +201,27 @@ Partial Class FormTrPOManagementKlemJadi
         Me.GroupBox3.TabIndex = 568
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Barang"
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Location = New System.Drawing.Point(205, 80)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(34, 15)
+        Me.Label2.TabIndex = 613
+        Me.Label2.Text = "Pack"
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.ForeColor = System.Drawing.Color.Red
+        Me.Label7.Location = New System.Drawing.Point(239, 79)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(15, 20)
+        Me.Label7.TabIndex = 612
+        Me.Label7.Text = "*"
         '
         'Label11
         '
@@ -426,43 +447,6 @@ Partial Class FormTrPOManagementKlemJadi
         Me.gridBarang.Size = New System.Drawing.Size(900, 244)
         Me.gridBarang.TabIndex = 509
         '
-        'clmPartNo
-        '
-        Me.clmPartNo.HeaderText = "No. Klem"
-        Me.clmPartNo.Name = "clmPartNo"
-        Me.clmPartNo.ReadOnly = True
-        Me.clmPartNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        '
-        'clmNamaBarang
-        '
-        Me.clmNamaBarang.HeaderText = "Nama"
-        Me.clmNamaBarang.Name = "clmNamaBarang"
-        Me.clmNamaBarang.ReadOnly = True
-        '
-        'clmUkuran
-        '
-        Me.clmUkuran.HeaderText = "Ukuran"
-        Me.clmUkuran.Name = "clmUkuran"
-        Me.clmUkuran.ReadOnly = True
-        '
-        'clmQtyReal
-        '
-        Me.clmQtyReal.HeaderText = "Jumlah ( Kardus )"
-        Me.clmQtyReal.Name = "clmQtyReal"
-        Me.clmQtyReal.ReadOnly = True
-        Me.clmQtyReal.Width = 115
-        '
-        'clmHargaBeli
-        '
-        Me.clmHargaBeli.HeaderText = "Harga Beli *"
-        Me.clmHargaBeli.Name = "clmHargaBeli"
-        '
-        'clmSubtotal
-        '
-        Me.clmSubtotal.HeaderText = "Subtotal"
-        Me.clmSubtotal.Name = "clmSubtotal"
-        Me.clmSubtotal.ReadOnly = True
-        '
         'txt_jumlah
         '
         Me.txt_jumlah.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
@@ -540,26 +524,41 @@ Partial Class FormTrPOManagementKlemJadi
         Me.Label6.TabIndex = 591
         Me.Label6.Text = "Jumlah ( IDR )"
         '
-        'Label2
+        'clmPartNo
         '
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(205, 80)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(34, 15)
-        Me.Label2.TabIndex = 613
-        Me.Label2.Text = "Pack"
+        Me.clmPartNo.HeaderText = "No. Klem"
+        Me.clmPartNo.Name = "clmPartNo"
+        Me.clmPartNo.ReadOnly = True
+        Me.clmPartNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         '
-        'Label7
+        'clmNamaBarang
         '
-        Me.Label7.AutoSize = True
-        Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.ForeColor = System.Drawing.Color.Red
-        Me.Label7.Location = New System.Drawing.Point(239, 79)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(15, 20)
-        Me.Label7.TabIndex = 612
-        Me.Label7.Text = "*"
+        Me.clmNamaBarang.HeaderText = "Nama"
+        Me.clmNamaBarang.Name = "clmNamaBarang"
+        Me.clmNamaBarang.ReadOnly = True
+        '
+        'clmUkuran
+        '
+        Me.clmUkuran.HeaderText = "Ukuran"
+        Me.clmUkuran.Name = "clmUkuran"
+        Me.clmUkuran.ReadOnly = True
+        '
+        'clmQtyReal
+        '
+        Me.clmQtyReal.HeaderText = "Jumlah ( Kardus ) *"
+        Me.clmQtyReal.Name = "clmQtyReal"
+        Me.clmQtyReal.Width = 125
+        '
+        'clmHargaBeli
+        '
+        Me.clmHargaBeli.HeaderText = "Harga Beli *"
+        Me.clmHargaBeli.Name = "clmHargaBeli"
+        '
+        'clmSubtotal
+        '
+        Me.clmSubtotal.HeaderText = "Subtotal"
+        Me.clmSubtotal.Name = "clmSubtotal"
+        Me.clmSubtotal.ReadOnly = True
         '
         'FormTrPOManagementKlemJadi
         '
@@ -632,12 +631,12 @@ Partial Class FormTrPOManagementKlemJadi
     Friend WithEvents Label10 As System.Windows.Forms.Label
     Friend WithEvents txtHargaBeli As System.Windows.Forms.TextBox
     Friend WithEvents Label8 As System.Windows.Forms.Label
+    Friend WithEvents Label2 As System.Windows.Forms.Label
+    Friend WithEvents Label7 As System.Windows.Forms.Label
     Friend WithEvents clmPartNo As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents clmNamaBarang As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents clmUkuran As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents clmQtyReal As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents clmHargaBeli As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents clmSubtotal As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Label2 As System.Windows.Forms.Label
-    Friend WithEvents Label7 As System.Windows.Forms.Label
 End Class

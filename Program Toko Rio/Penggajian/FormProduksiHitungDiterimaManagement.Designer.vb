@@ -71,6 +71,7 @@ Partial Class FormProduksiHitungDiterimaManagement
         Me.clmQtyPrioritas = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.clmKdMerk = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.clmIsiMerk = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.clmPerkiraan = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.GroupBox2.SuspendLayout()
         Me.main_tool_strip.SuspendLayout()
         CType(Me.gridKlemPantek, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -419,9 +420,9 @@ Partial Class FormProduksiHitungDiterimaManagement
         Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label10.Location = New System.Drawing.Point(165, 60)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(53, 15)
+        Me.Label10.Size = New System.Drawing.Size(40, 15)
         Me.Label10.TabIndex = 629
-        Me.Label10.Text = "/ Karung"
+        Me.Label10.Text = "/ Pack"
         '
         'txtQtyKlemJadi
         '
@@ -495,7 +496,7 @@ Partial Class FormProduksiHitungDiterimaManagement
         Me.gridKlemJadi.AllowUserToDeleteRows = False
         Me.gridKlemJadi.AllowUserToOrderColumns = True
         Me.gridKlemJadi.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.gridKlemJadi.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clmKdKlemJadi, Me.clmUkuranKlemJadi, Me.clmMerkJadi, Me.clmHargaModalKlemJadi, Me.clmQtyKlemJadi, Me.clmQtyPrioritas, Me.clmKdMerk, Me.clmIsiMerk})
+        Me.gridKlemJadi.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clmKdKlemJadi, Me.clmUkuranKlemJadi, Me.clmMerkJadi, Me.clmHargaModalKlemJadi, Me.clmQtyKlemJadi, Me.clmQtyPrioritas, Me.clmKdMerk, Me.clmIsiMerk, Me.clmPerkiraan})
         Me.gridKlemJadi.Location = New System.Drawing.Point(340, 19)
         Me.gridKlemJadi.Name = "gridKlemJadi"
         Me.gridKlemJadi.Size = New System.Drawing.Size(633, 188)
@@ -552,6 +553,12 @@ Partial Class FormProduksiHitungDiterimaManagement
         Me.clmIsiMerk.Name = "clmIsiMerk"
         Me.clmIsiMerk.ReadOnly = True
         Me.clmIsiMerk.Visible = False
+        '
+        'clmPerkiraan
+        '
+        Me.clmPerkiraan.HeaderText = "Perkiraan"
+        Me.clmPerkiraan.Name = "clmPerkiraan"
+        Me.clmPerkiraan.ReadOnly = True
         '
         'FormProduksiHitungDiterimaManagement
         '
@@ -633,4 +640,5 @@ Partial Class FormProduksiHitungDiterimaManagement
     Friend WithEvents clmQtyPrioritas As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents clmKdMerk As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents clmIsiMerk As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents clmPerkiraan As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

@@ -56,18 +56,24 @@ Public Class FormProduksiPantekDiterimaManagement
                                         " klem.Ukuran 'UkuranKlem', sum(pantek.QtyKlemMentah) QtyKlemMentah, " & _
                                         " paku.KdBahanMentah 'KdPaku', paku.NamaBahanMentah 'NamaPaku', " & _
                                         " paku.Ukuran 'UkuranPaku', sum(pantek.QtyPaku) QtyPaku, QtyKlemMentahDiterima, " & _
-                                        " mfp.QtyKlemMentah 'QtyKlemFormula', mfp.QtyKlemJadi 'QtyKlemJadiFormula', " & _
-                                        " mfp.QtyPaku 'QtyPakuFormula' " & _
+                                        " IFNULL(mfp.QtyKlemMentah, 0) 'QtyKlemFormula', " & _
+                                        " IFNULL(mfp.QtyKlemJadi, 0) 'QtyKlemJadiFormula', " & _
+                                        " IFNULL(mfp.QtyPaku, 0) 'QtyPakuFormula' " & _
                                         " from trpantek_diterima_detail pantek " & _
                                         " Join MsBahanMentah klem On klem.KdBahanMentah = KdKlemMentah " & _
                                         " Join MsBahanMentah paku On paku.KdBahanMentah = KdPaku " & _
-                                        " join msformula mfp on mfp.UkuranKlemMentah = klem.Ukuran " & _
+                                        " LEFT JOIN msformula mfp on mfp.UkuranKlemMentah = klem.Ukuran " & _
+                                        " AND mfp.UkuranPaku = paku.Ukuran " & _
                                         " where KdPantekDiterima = '" & PK & "' " & _
                                         " GROUP BY klem.KdBahanMentah, paku.KdBahanMentah " & _
                                         " order by klem.NamaBahanMentah asc ")
             gridBarang.Rows.Clear()
+
             Do While reader.Read
-                Dim QtyKlemPantek = Val(reader("QtyKlemMentah")) / Val(reader("QtyKlemJadiFormula"))
+                Dim QtyKlemPantek = 0
+                If Val(reader("QtyKlemJadiFormula")) Then
+                    QtyKlemPantek = Val(reader("QtyKlemMentah")) / Val(reader("QtyKlemJadiFormula"))
+                End If
                 Dim QtyKlemMentah = QtyKlemPantek * reader("QtyKlemFormula")
                 Dim QtyPaku = QtyKlemPantek * reader("QtyPakuFormula")
                 gridBarang.Rows.Add()
@@ -92,10 +98,8 @@ Public Class FormProduksiPantekDiterimaManagement
             .Font = New Font(.Font.FontFamily, .Font.Size, _
               .Font.Style Or FontStyle.Bold, GraphicsUnit.Point)
             .ForeColor = Color.Gold
-
         End With
         gridBarang.ReadOnly = False
-
     End Sub
 
     Public Sub setCmbPantekKeluar()
@@ -350,20 +354,26 @@ Public Class FormProduksiPantekDiterimaManagement
             sql = " select pd.KdKlemMentah, bm.namaBahanMentah 'NamaKlem', KdPaku, " & _
                   " paku.namaBahanMentah 'NamaPaku', " & _
                   " pd.QtyKlemMentah, pd.QtyPaku, KdKlemMentah, KdPaku, " & _
-                  " mfp.QtyKlemMentah 'QtyKlemFormula', mfp.QtyKlemJadi 'QtyKlemJadiFormula', " & _
-                  " mfp.QtyPaku 'QtyPakuFormula' " & _
-                  " from  trpantekdetail pd " & _
+                  " IFNULL(mfp.QtyKlemMentah, 0) 'QtyKlemFormula', " & _
+                  " IFNULL(mfp.QtyKlemJadi, 0) 'QtyKlemJadiFormula', " & _
+                  " IFNULL(mfp.QtyPaku, 0) 'QtyPakuFormula' " & _
+                  " from trpantekdetail pd " & _
                   " join msBahanMentah bm on bm.kdBahanMentah = pd.KdKlemMentah " & _
                   " join msBahanMentah paku on paku.kdBahanMentah = pd.KdPaku " & _
-                  " join msformula mfp on mfp.UkuranKlemMentah = bm.Ukuran " & _
+                  " LEFT join msformula mfp on mfp.UkuranKlemMentah = bm.Ukuran " & _
+                  " AND mfp.UkuranPaku = paku.Ukuran " & _
                   " where pd.KdPantek='" & cmbPantekKeluar.Text & "' "
             reader = execute_reader(sql)
             Dim harga As Double = 0
             gridBarang.Rows.Clear()
+
             Do While reader.Read
-                Dim QtyKlemPantek = Val(reader("QtyKlemMentah")) / Val(reader("QtyKlemJadiFormula"))
-                Dim QtyKlemMentah = QtyKlemPantek * reader("QtyKlemFormula")
-                Dim QtyPaku = QtyKlemPantek * reader("QtyPakuFormula")
+                Dim QtyKlemPantek = 0
+                If Val(reader("QtyKlemJadiFormula")) Then
+                    QtyKlemPantek = Val(reader("QtyKlemMentah")) / Val(reader("QtyKlemJadiFormula"))
+                End If
+                Dim QtyKlemMentah = Val(QtyKlemPantek) * Val(reader("QtyKlemFormula"))
+                Dim QtyPaku = Val(QtyKlemPantek) * Val(reader("QtyPakuFormula"))
                 gridBarang.Rows.Add()
                 gridBarang.Rows.Item(gridBarang.RowCount - 1).Cells("clmKdKlem").Value = Trim(reader("KdKlemMentah"))
                 gridBarang.Rows.Item(gridBarang.RowCount - 1).Cells("clmKdPaku").Value = Trim(reader("KdPaku"))
@@ -371,7 +381,7 @@ Public Class FormProduksiPantekDiterimaManagement
                 gridBarang.Rows.Item(gridBarang.RowCount - 1).Cells("clmUkuranPaku").Value = reader("NamaPaku")
                 gridBarang.Rows.Item(gridBarang.RowCount - 1).Cells("clmQtyKlem").Value = Val(reader("QtyKlemMentah"))
                 gridBarang.Rows.Item(gridBarang.RowCount - 1).Cells("clmQtyPaku").Value = Val(reader("QtyPaku"))
-                gridBarang.Rows.Item(gridBarang.RowCount - 1).Cells("clmPerkiraan").Value = QtyKlemMentah & " - " & QtyPaku
+                gridBarang.Rows.Item(gridBarang.RowCount - 1).Cells("clmPerkiraan").Value = QtyKlemMentah.ToString & " - " & QtyPaku.ToString
                 gridBarang.Rows.Item(gridBarang.RowCount - 1).Cells("clmQtyDiterima").Value = 0
             Loop
             reader.Close()

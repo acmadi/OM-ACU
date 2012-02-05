@@ -117,8 +117,12 @@ Public Class FormTrReturPembelian
 
         If type_retur = "klem" Then
             Me.Text = "Retur Klem Mentah"
-        Else
+        ElseIf type_retur = "paku" Then
             Me.Text = "Retur Paku"
+        ElseIf type_retur = "klem_jadi" Then
+            Me.Text = "Retur Klem Jadi"
+        Else
+            Me.Close()
         End If
 
         ubahAktif(False)
@@ -139,7 +143,11 @@ Public Class FormTrReturPembelian
 
     Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
         Try
-            open_subpage("FormTrReturPembelianM", "", type_retur)
+            If type_retur = "klem_jadi" Then
+                open_subpage("FormTrReturPembelianMKlemJadi", "", type_retur)
+            Else
+                open_subpage("FormTrReturPembelianM", "", type_retur)
+            End If
             viewAllData("", "")
         Catch ex As Exception
             MsgBox(ex.ToString, MsgBoxStyle.Critical, "Warning!!!")
@@ -150,7 +158,11 @@ Public Class FormTrReturPembelian
         Try
             If DataGridView1.RowCount <> 0 Then
                 Dim selected_cell = DataGridView1.CurrentRow.Cells(0).Value
-                open_subpage("FormTrReturPembelianM", selected_cell, type_retur)
+                If type_retur = "klem_jadi" Then
+                    open_subpage("FormTrReturPembelianMKlemJadi", selected_cell, type_retur)
+                Else
+                    open_subpage("FormTrReturPembelianM", selected_cell, type_retur)
+                End If
             Else
                 msgInfo("Data retur tidak ditemukan.")
             End If
@@ -212,15 +224,29 @@ Public Class FormTrReturPembelian
             idPrint = DataGridView1.CurrentRow.Cells(0).Value
 
             Dim query As String
-            query = "select retur.KdRetur ,TanggalRetur,retur.KdPB `No Penerimaan` ,   " & _
-           " Nama, retur.Grandtotal,mp.kdbahanmentah KDBarang,NamaBahanMentah NamaBarang, harga, rd.disc,rd.qty  " & _
-           " from  trheaderreturbeli  retur " & _
-           " Join trheaderpb pb On pb.No_PB = retur.kdPB   " & _
-           " join trdetailreturbeli rd on rd.kdretur = retur.kdretur " & _
-           " join msbahanmentah mp on mp.kdbahanmentah = rd.kdbahanmentah " & _
-           " Join mssupplier mt On mt.kdsupplier = pb.kdsupplier   " & _
-           " Join msuser mu On mu.userid = retur.userid  " & _
-           "where   retur.kdretur='" & idPrint & "' "
+            If type_retur = "klem_jadi" Then
+                query = " select retur.KdRetur, TanggalRetur, retur.KdPB `No Penerimaan` , " & _
+                        " Nama, retur.Grandtotal, mp.KdBarang KDBarang, " & _
+                        " NamaBarang NamaBarang, harga, rd.disc,rd.qty  " & _
+                        " from  trheaderreturbeli  retur " & _
+                        " Join trheaderpb pb On pb.No_PB = retur.kdPB   " & _
+                        " join trdetailreturbeli rd on rd.KdBahanMentah = retur.kdretur " & _
+                        " join MsBarang mp on mp.KdBarang = rd.KdBahanMentah " & _
+                        " Join mssupplier mt On mt.kdsupplier = pb.kdsupplier " & _
+                        " Join msuser mu On mu.userid = retur.userid  " & _
+                        " where   retur.kdretur='" & idPrint & "' "
+            Else
+                query = " select retur.KdRetur , TanggalRetur,retur.KdPB `No Penerimaan` , " & _
+                        " Nama, retur.Grandtotal,mp.kdbahanmentah KDBarang, " & _
+                        " NamaBahanMentah NamaBarang, harga, rd.disc,rd.qty  " & _
+                        " from  trheaderreturbeli  retur " & _
+                        " Join trheaderpb pb On pb.No_PB = retur.kdPB   " & _
+                        " join trdetailreturbeli rd on rd.kdretur = retur.kdretur " & _
+                        " join msbahanmentah mp on mp.kdbahanmentah = rd.kdbahanmentah " & _
+                        " Join mssupplier mt On mt.kdsupplier = pb.kdsupplier " & _
+                        " Join msuser mu On mu.userid = retur.userid  " & _
+                        " where   retur.kdretur='" & idPrint & "' "
+            End If
             'TextBox1.Text = query
             dropviewM("viewCetakTrReturBeli" & kdKaryawan)
             createviewM(query, "viewCetakTrReturBeli" & kdKaryawan)
@@ -237,6 +263,7 @@ Public Class FormTrReturPembelian
                 If DataGridView1.CurrentRow.Cells("Status Retur").Value = "New" Then
                     Dim selected_cell = DataGridView1.CurrentRow.Cells(0).Value
                     If MsgBox("Anda yakin ingin menghapus kode retur pembelian " & selected_cell & "?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "Confirmation") = MsgBoxResult.Yes Then
+                        execute_update("delete from trdetailreturbeli where " & PK & " = '" & selected_cell & "' ")
                         execute_update("delete from " & tab & " where  " & PK & " = '" & selected_cell & "' And StatusRetur = 0 ")
                         msgInfo("Data berhasil dihapus")
                         viewAllData("", "")

@@ -406,4 +406,12 @@ Public Class FormMain
     Private Sub KlemJadiToolStripMenuItem5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles KlemJadiToolStripMenuItem5.Click
         open_page("FormTrPO", "klem_jadi")
     End Sub
+
+    Private Sub KlemJadiToolStripMenuItem7_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles KlemJadiToolStripMenuItem7.Click
+        open_page("FormTrReturPembelian", "klem_jadi")
+    End Sub
+
+    Private Sub KlemJadiToolStripMenuItem8_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles KlemJadiToolStripMenuItem8.Click
+        open_page("FormPurchasePayment", "klem_jadi")
+    End Sub
 End Class

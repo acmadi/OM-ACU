@@ -69,6 +69,9 @@ Partial Class FormBahanMentahHistory
         Me.Label24 = New System.Windows.Forms.Label
         Me.gridReturPB = New System.Windows.Forms.DataGridView
         Me.GroupBox2 = New System.Windows.Forms.GroupBox
+        Me.lblSatuanKlemPantek = New System.Windows.Forms.Label
+        Me.lblKlemSudahPantek = New System.Windows.Forms.Label
+        Me.txtKlemPantek = New System.Windows.Forms.TextBox
         Me.lblSatuanKg = New System.Windows.Forms.Label
         Me.Label2 = New System.Windows.Forms.Label
         Me.txtQtyKg = New System.Windows.Forms.TextBox
@@ -136,9 +139,6 @@ Partial Class FormBahanMentahHistory
         Me.ComboBox3 = New System.Windows.Forms.ComboBox
         Me.Label21 = New System.Windows.Forms.Label
         Me.DataGridView3 = New System.Windows.Forms.DataGridView
-        Me.Label1 = New System.Windows.Forms.Label
-        Me.Label3 = New System.Windows.Forms.Label
-        Me.txtKlemPantek = New System.Windows.Forms.TextBox
         Me.sales_order_tab.SuspendLayout()
         Me.history.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -673,8 +673,8 @@ Partial Class FormBahanMentahHistory
         '
         'GroupBox2
         '
-        Me.GroupBox2.Controls.Add(Me.Label1)
-        Me.GroupBox2.Controls.Add(Me.Label3)
+        Me.GroupBox2.Controls.Add(Me.lblSatuanKlemPantek)
+        Me.GroupBox2.Controls.Add(Me.lblKlemSudahPantek)
         Me.GroupBox2.Controls.Add(Me.txtKlemPantek)
         Me.GroupBox2.Controls.Add(Me.lblSatuanKg)
         Me.GroupBox2.Controls.Add(Me.Label2)
@@ -695,6 +695,37 @@ Partial Class FormBahanMentahHistory
         Me.GroupBox2.Size = New System.Drawing.Size(275, 242)
         Me.GroupBox2.TabIndex = 484
         Me.GroupBox2.TabStop = False
+        '
+        'lblSatuanKlemPantek
+        '
+        Me.lblSatuanKlemPantek.AutoSize = True
+        Me.lblSatuanKlemPantek.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblSatuanKlemPantek.Location = New System.Drawing.Point(211, 187)
+        Me.lblSatuanKlemPantek.Name = "lblSatuanKlemPantek"
+        Me.lblSatuanKlemPantek.Size = New System.Drawing.Size(48, 15)
+        Me.lblSatuanKlemPantek.TabIndex = 584
+        Me.lblSatuanKlemPantek.Text = "/ Karung"
+        '
+        'lblKlemSudahPantek
+        '
+        Me.lblKlemSudahPantek.AutoSize = True
+        Me.lblKlemSudahPantek.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblKlemSudahPantek.Location = New System.Drawing.Point(6, 182)
+        Me.lblKlemSudahPantek.Name = "lblKlemSudahPantek"
+        Me.lblKlemSudahPantek.Size = New System.Drawing.Size(138, 15)
+        Me.lblKlemSudahPantek.TabIndex = 583
+        Me.lblKlemSudahPantek.Text = "Stok Klem Sudah Dipantek"
+        '
+        'txtKlemPantek
+        '
+        Me.txtKlemPantek.Enabled = False
+        Me.txtKlemPantek.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtKlemPantek.Location = New System.Drawing.Point(151, 181)
+        Me.txtKlemPantek.MaxLength = 20
+        Me.txtKlemPantek.Name = "txtKlemPantek"
+        Me.txtKlemPantek.Size = New System.Drawing.Size(54, 21)
+        Me.txtKlemPantek.TabIndex = 582
+        Me.txtKlemPantek.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'lblSatuanKg
         '
@@ -1393,37 +1424,6 @@ Partial Class FormBahanMentahHistory
         Me.DataGridView3.Size = New System.Drawing.Size(816, 522)
         Me.DataGridView3.TabIndex = 15
         '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(211, 187)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(48, 15)
-        Me.Label1.TabIndex = 584
-        Me.Label1.Text = "/ Karung"
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(6, 182)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(138, 15)
-        Me.Label3.TabIndex = 583
-        Me.Label3.Text = "Stok Klem Sudah Dipantek"
-        '
-        'txtKlemPantek
-        '
-        Me.txtKlemPantek.Enabled = False
-        Me.txtKlemPantek.Font = New System.Drawing.Font("Times New Roman", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtKlemPantek.Location = New System.Drawing.Point(151, 181)
-        Me.txtKlemPantek.MaxLength = 20
-        Me.txtKlemPantek.Name = "txtKlemPantek"
-        Me.txtKlemPantek.Size = New System.Drawing.Size(54, 21)
-        Me.txtKlemPantek.TabIndex = 582
-        Me.txtKlemPantek.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
         'FormBahanMentahHistory
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1591,8 +1591,8 @@ Partial Class FormBahanMentahHistory
     Friend WithEvents lblSatuanKg As System.Windows.Forms.Label
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents txtQtyKg As System.Windows.Forms.TextBox
-    Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents Label3 As System.Windows.Forms.Label
+    Friend WithEvents lblSatuanKlemPantek As System.Windows.Forms.Label
+    Friend WithEvents lblKlemSudahPantek As System.Windows.Forms.Label
     Friend WithEvents txtKlemPantek As System.Windows.Forms.TextBox
 
 End Class

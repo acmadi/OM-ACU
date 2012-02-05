@@ -287,7 +287,6 @@ Public Class FormTrPOManagementKlemJadi
         For i As Integer = 0 To gridBarang.RowCount - 1
             Dim statusDetail = 0
 
-            Dim Qty = 0
             Dim Qty_real = Val(gridBarang.Rows.Item(i).Cells("clmQtyReal").Value)
             Dim OP = "Plus"
             Dim Attribute = "QtyPurchase_Plus"
@@ -300,13 +299,13 @@ Public Class FormTrPOManagementKlemJadi
 
             sqlDetail = " insert into trDetailPO ( no_po, kdbahanmentah, jumlah, " & _
                         " jumlah_real, harga ) values( " & _
-                        " '" & Trim(txtID.Text) & "','" & KdBarang & "', '" & Qty & "', " & _
+                        " '" & Trim(txtID.Text) & "','" & KdBarang & "', '" & Qty_real & "', " & _
                         " '" & Qty_real & "', '" & harga & "' ) "
             execute_update_manual(sqlDetail)
 
             sqlDetail = " insert into trDetailPB ( No_PB, kdbahanmentah, " & _
                         " Qty, Qty_real, Harga, Disc, QtyPenerimaan ) values( " & _
-                        " '" & Trim(txtID.Text) & "','" & KdBarang & "', " & Qty & ", " & _
+                        " '" & Trim(txtID.Text) & "','" & KdBarang & "', " & Qty_real & ", " & _
                         " " & Qty_real & ",'" & harga & "', 0,'" & Qty_real & "' ) "
             execute_update_manual(sqlDetail)
         Next
@@ -361,7 +360,7 @@ Public Class FormTrPOManagementKlemJadi
                           " '" & Jumlah & "' ) "
                     execute_update_manual(sql)
                 ElseIf status = "update" Then
-                    sql = " update trheaderpo  set  " & _
+                    sql = " update trheaderpo SET  " & _
                           " Tanggal_PO = '" & dtpPO.Value.ToString("yyyy/MM/dd HH:mm:ss") & "'," & _
                           " KdSupplier = '" & Trim(supplierID(0)) & "'," & _
                           " StatusPO = '" & flag & "'," & _

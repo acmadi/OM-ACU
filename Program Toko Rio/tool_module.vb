@@ -137,6 +137,11 @@ Module tool_module
             form.MdiParent = FormMain
             form.Show()
             opened_page = "FormPOManagement"
+        ElseIf page_to_open = "FormPOManagementKlemJadi" Then
+            form = New FormTrPOManagementKlemJadi
+            form.MdiParent = FormMain
+            form.Show()
+            opened_page = "FormPOManagementKlemJadi"
         ElseIf page_to_open = "FormTrPenerimaanBahanMentah" Then
             form = New FormTrPenerimaanBahanMentah_backup
             form.MdiParent = FormMain
@@ -405,6 +410,20 @@ Module tool_module
             data_carier(1) = ""
             data_carier(2) = ""
             sub_form = ""
+        ElseIf subpage_to_open = "FormPOManagementKlemJadi" Then
+            sub_form = New FormTrPOManagementKlemJadi
+            data_carier(0) = detail_id
+            If (detail_id <> "") Then
+                data_carier(1) = "update"
+            Else
+                data_carier(1) = "add"
+            End If
+            data_carier(2) = additional
+            sub_form.ShowDialog(FormMain)
+            data_carier(0) = ""
+            data_carier(1) = ""
+            data_carier(2) = ""
+            sub_form = ""
         ElseIf subpage_to_open = "FormTrPenerimaanBahanMentahM" Then
             sub_form = New FormTrPenerimaanBahanMentahM
             data_carier(0) = detail_id
@@ -445,8 +464,36 @@ Module tool_module
             data_carier(1) = ""
             data_carier(2) = ""
             sub_form = ""
+        ElseIf subpage_to_open = "FormTrReturPembelianMKlemJadi" Then
+            sub_form = New FormTrReturPembelianMKlemJadi
+            data_carier(0) = detail_id
+            If (detail_id <> "") Then
+                data_carier(1) = "update"
+            Else
+                data_carier(1) = "add"
+            End If
+            data_carier(2) = additional
+            sub_form.ShowDialog(FormMain)
+            data_carier(0) = ""
+            data_carier(1) = ""
+            data_carier(2) = ""
+            sub_form = ""
         ElseIf subpage_to_open = "FormPurchasePaymentManagamen" Then
             sub_form = New FormPurchasePaymentManagamen
+            data_carier(0) = detail_id
+            If (detail_id <> "") Then
+                data_carier(1) = "update"
+            Else
+                data_carier(1) = "add"
+            End If
+            data_carier(2) = additional
+            sub_form.ShowDialog(FormPurchasePaymentManagamen)
+            data_carier(0) = ""
+            data_carier(1) = ""
+            data_carier(2) = ""
+            sub_form = ""
+        ElseIf subpage_to_open = "FormPurchasePaymentManagamenKlemJadi" Then
+            sub_form = New FormPurchasePaymentManagamenKlemJadi
             data_carier(0) = detail_id
             If (detail_id <> "") Then
                 data_carier(1) = "update"

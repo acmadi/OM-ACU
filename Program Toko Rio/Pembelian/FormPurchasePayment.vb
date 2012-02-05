@@ -122,8 +122,12 @@ Public Class FormPurchasePayment
         type_payment = data_carier(0)
         If type_payment = "klem" Then
             Me.Text = "Pembayaran Klem Mentah"
-        Else
+        ElseIf type_payment = "paku" Then
             Me.Text = "Pembayaran Paku"
+        ElseIf type_payment = "klem_jadi" Then
+            Me.Text = "Pembayaran Klem Jadi"
+        Else
+            Me.Close()
         End If
 
         viewAllData("", "")
@@ -143,7 +147,11 @@ Public Class FormPurchasePayment
 
     Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
         Try
-            open_subpage("FormPurchasePaymentManagamen", "", type_payment)
+            If type_payment = "klem_jadi" Then
+                open_subpage("FormPurchasePaymentManagamenKlemJadi", "", type_payment)
+            Else
+                open_subpage("FormPurchasePaymentManagamen", "", type_payment)
+            End If
             viewAllData("", "")
         Catch ex As Exception
             MsgBox(ex.ToString, MsgBoxStyle.Critical, "Warning!!!")
@@ -154,7 +162,11 @@ Public Class FormPurchasePayment
         Try
             If DataGridView1.RowCount <> 0 Then
                 Dim selected_cell = DataGridView1.CurrentRow.Cells(0).Value
-                open_subpage("FormPurchasePaymentManagamen", selected_cell, type_payment)
+                If type_payment = "klem_jadi" Then
+                    open_subpage("FormPurchasePaymentManagamenKlemJadi", selected_cell, type_payment)
+                Else
+                    open_subpage("FormPurchasePaymentManagamen", selected_cell, type_payment)
+                End If
                 viewAllData("", "")
             Else
                 msgInfo("Data pembayaran tidak ditemukan.")
@@ -198,6 +210,7 @@ Public Class FormPurchasePayment
                 If DataGridView1.CurrentRow.Cells(6).Value = "New" Then
                     Dim selected_cell = DataGridView1.CurrentRow.Cells(0).Value
                     If MsgBox("Anda yakin ingin menghapus kode pembelian " & selected_cell & "?", MsgBoxStyle.Question + MsgBoxStyle.YesNo, "Confirmation") = MsgBoxResult.Yes Then
+                        execute_update("delete from trpurchasepaymentdetail where  " & PK & " = '" & selected_cell & "' ")
                         execute_update("delete from " & tab & " where  " & PK & " = '" & selected_cell & "' And StatusPurchasePayment = 0 ")
                         msgInfo("Data berhasil dihapus")
                         viewAllData("", "")

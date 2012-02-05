@@ -140,7 +140,11 @@ Public Class FormTrPO
 
     Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
         Try
-            open_subpage("FormPOManagement", "", type_pb)
+            If type_pb = "klem_jadi" Then
+                open_subpage("FormPOManagementKlemJadi", "", type_pb)
+            Else
+                open_subpage("FormPOManagement", "", type_pb)
+            End If
             viewAllData("", "")
         Catch ex As Exception
             MsgBox(ex.ToString, MsgBoxStyle.Critical, "Warning!!!")
@@ -170,7 +174,11 @@ Public Class FormTrPO
     Private Sub btnUpdate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdate.Click
         If DataGridView1.RowCount <> 0 Then
             Dim selected_cell = DataGridView1.CurrentRow.Cells(0).Value
-            open_subpage("FormPOManagement", selected_cell, type_pb)
+            If type_pb = "klem_jadi" Then
+                open_subpage("FormPOManagementKlemJadi", selected_cell, type_pb)
+            Else
+                open_subpage("FormPOManagement", selected_cell, type_pb)
+            End If
             viewAllData("", "")
         Else
             msgInfo("Data faktur tidak ditemukan.")
