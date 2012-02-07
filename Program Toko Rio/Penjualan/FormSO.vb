@@ -93,7 +93,7 @@ Public Class FormSO
                 sql &= "  And " & col & "  like '%" & cr & "%' "
             End If
         End If
-        sql &= " Order By StatusSO asc, no_increment Desc "
+        sql &= " Order By StatusSO DESC, no_increment Desc "
 
         DataGridView1.DataSource = execute_datatable(sql)
     End Sub

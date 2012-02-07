@@ -574,11 +574,13 @@ Partial Class FormSOManagamen
         Me.btnSave.Text = "Simpan"
         Me.btnSave.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
+        Me.btnSave.Visible = False
         '
         'ToolStripSeparator4
         '
         Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
         Me.ToolStripSeparator4.Size = New System.Drawing.Size(6, 54)
+        Me.ToolStripSeparator4.Visible = False
         '
         'btnConfirms
         '

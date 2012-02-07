@@ -104,10 +104,10 @@ Public Class FormSOManagamen
                 Toko = readerSO.Item("KdToko") & " - " & readerSO.Item("NamaToko")
                 txt_disc_faktur.Text = readerSO.Item("Disc")
                 StatusSO = readerSO.Item("StatusSO")
-                If StatusSO <> 0 And StatusSO <> 1 Then
-                    btnSave.Enabled = False
-                    btnConfirms.Enabled = False
-                End If
+                'If StatusSO <> 0 And StatusSO <> 1 Then
+                '    btnSave.Enabled = False
+                '    btnConfirms.Enabled = False
+                'End If
             End If
             readerSO.Close()
             cmbSales.Text = Sales
@@ -395,7 +395,7 @@ Public Class FormSOManagamen
         End If
 
         Dim sqlHeader = " Update TrSalesOrder set StatusSO = '" & statusSO & "' " & _
-                    " Where KdSO = '" & Trim(txtID.Text) & "' "
+                        " Where KdSO = '" & Trim(txtID.Text) & "' "
         execute_update_manual(sqlHeader)
         Return True
     End Function
