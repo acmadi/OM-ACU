@@ -130,7 +130,7 @@ Public Class FormMsBahanMentah
 
     Public Sub setCmbJenis()
         cmbUkuran.Items.Clear()
-        If jenis = "Klen" Then
+        If jenis = "Klem" Then
             cmbUkuran.Items.Add("4")
             cmbUkuran.Items.Add("5")
             cmbUkuran.Items.Add("6")
@@ -310,9 +310,9 @@ Public Class FormMsBahanMentah
         ElseIf Val(txtQtyKarung.Text) = 0 Then
             msgInfo("Jumlah harus diisi")
             txtQtyKarung.Focus()
-        ElseIf Val(harga) = 0 And status = "add" Then
-            msgInfo("Harga moddal harus diisi dan lebih besar dari 0")
-            txtHarga.Focus()
+            'ElseIf Val(harga) = 0 And status = "add" Then
+            '    msgInfo("Harga moddal harus diisi dan lebih besar dari 0")
+            '    txtHarga.Focus()
         ElseIf Val(hargaJualKg) = 0 And status = "add" Then
             msgInfo("Harga jual moddal harus diisi dan lebih besar dari 0")
             txtJualPerKg.Focus()
@@ -328,67 +328,67 @@ Public Class FormMsBahanMentah
             Dim Attribute = ""
             StockAwal = StockAkhir
             If status = "add" Then
-                If Val(harga) = 0 Then
-                    msgInfo("Harga harus diisi dan lebih besar dari 0")
-                    txtHarga.Focus()
+                'If Val(harga) = 0 Then
+                '    msgInfo("Harga harus diisi dan lebih besar dari 0")
+                '    txtHarga.Focus()
+                'Else
+                Dim exists As Integer = 0
+                sql = "select * from  " & tab & "  where NamaBahanMentah='" & Trim(txtNama.Text) & (cmbUkuran.Text) & "' "
+                Dim reader = execute_reader(sql)
+                If reader.Read Then
+                    exists = 1
                 Else
-                    Dim exists As Integer = 0
-                    sql = "select * from  " & tab & "  where NamaBahanMentah='" & Trim(txtNama.Text) & (cmbUkuran.Text) & "' "
-                    Dim reader = execute_reader(sql)
-                    If reader.Read Then
-                        exists = 1
-                    Else
-                        exists = 0
-                    End If
-                    reader.Close()
-                    If exists = 1 Then
-                        msgInfo("Data telah ada .")
-                    Else
-                        sql = " insert into  " & tab & "  values('" + Trim(txtID.Text) + "',NULL,'" & Trim(txtNama.Text) & (cmbUkuran.Text) & "', " & _
-                        " '" & Trim(cmbUkuran.Text) & "','" & jenis & "','" & satuan & "','1', " & _
-                        " '" & hargaJualKg & "','" & hargaJualKarung & "','" & txtPerKg.Text & "')"
+                    exists = 0
+                End If
+                reader.Close()
+                If exists = 1 Then
+                    msgInfo("Data telah ada .")
+                Else
+                    sql = " insert into  " & tab & "  values('" + Trim(txtID.Text) + "',NULL,'" & Trim(txtNama.Text) & (cmbUkuran.Text) & "', " & _
+                    " '" & Trim(cmbUkuran.Text) & "','" & jenis & "','" & satuan & "','1', " & _
+                    " '" & hargaJualKg & "','" & hargaJualKarung & "','" & txtPerKg.Text & "')"
 
-                        QtyUpdate_Plus = Val(txtQtyKarung.Text)
-                        QtyUpdate = QtyUpdate_Plus
-                        OP = "Plus"
-                        Attribute = "QtyUpdate_Plus"
+                    QtyUpdate_Plus = Val(txtQtyKarung.Text)
+                    QtyUpdate = QtyUpdate_Plus
+                    OP = "Plus"
+                    Attribute = "QtyUpdate_Plus"
 
-                        dbconmanual.Open()
-                        Dim trans As MySql.Data.MySqlClient.MySqlTransaction
+                    dbconmanual.Open()
+                    Dim trans As MySql.Data.MySqlClient.MySqlTransaction
 
-                        trans = dbconmanual.BeginTransaction(IsolationLevel.ReadCommitted)
-                        Try
-                            execute_update_manual(sql)
-                            StockBahanMentah(QtyUpdate, OP, hargaJualKg, Trim(txtID.Text), Attribute, "", "Form " & jenis, jenis)
-                            ubahAktif(False)
-                            trans.Commit()
-                            msgInfo("Data berhasil disimpan")
-                            viewAllData("", "")
-                        Catch ex As Exception
-                            trans.Rollback()
-                            MsgBox(ex.ToString, MsgBoxStyle.Information)
-                        End Try
-                        dbconmanual.Close()
-                    End If
+                    trans = dbconmanual.BeginTransaction(IsolationLevel.ReadCommitted)
+                    Try
+                        execute_update_manual(sql)
+                        StockBahanMentah(QtyUpdate, OP, hargaJualKg, Trim(txtID.Text), Attribute, "", "Form " & jenis, jenis)
+                        ubahAktif(False)
+                        trans.Commit()
+                        msgInfo("Data berhasil disimpan")
+                        viewAllData("", "")
+                    Catch ex As Exception
+                        trans.Rollback()
+                        MsgBox(ex.ToString, MsgBoxStyle.Information)
+                    End Try
+                    dbconmanual.Close()
+                    'End If
                 End If
             ElseIf status = "update" Then
-                Try
-                    sql = " update   " & tab & "  set  NamaBahanMentah='" & Trim(txtNama.Text) & (cmbUkuran.Text) & "', " & _
-                          " Ukuran='" & Trim(cmbUkuran.Text) & "', " & _
-                          " HargaJualKg='" & Trim(hargaJualKg) & "', " & _
-                          " HargaJualKarung='" & Trim(hargaJualKarung) & "', " & _
-                          " KarungToKg='" & Trim(txtPerKg.Text) & "', " & _
-                          " Satuan = '" & Trim(satuan) & "' " & _
-                          " where  " & PK & "='" + txtID.Text + "' "
-                    execute_update(sql)
-                    viewAllData("", "")
-                    ubahAktif(False)
+            Try
+                sql = " update   " & tab & "  set  NamaBahanMentah='" & Trim(txtNama.Text) & (cmbUkuran.Text) & "', " & _
+                      " Ukuran='" & Trim(cmbUkuran.Text) & "', " & _
+                      " HargaJualKg='" & Trim(hargaJualKg) & "', " & _
+                      " HargaJualKarung='" & Trim(hargaJualKarung) & "', " & _
+                      " KarungToKg='" & Trim(txtPerKg.Text) & "', " & _
+                      " Satuan = '" & Trim(satuan) & "' " & _
+                      " where  " & PK & "='" + txtID.Text + "' "
+                execute_update(sql)
+                viewAllData("", "")
+                ubahAktif(False)
 
-                    msgInfo("Data berhasil disimpan")
-                Catch ex As Exception
-                    msgWarning(" Data tidak valid")
-                End Try
-            End If
+                msgInfo("Data berhasil disimpan")
+            Catch ex As Exception
+                msgWarning(" Data tidak valid")
+            End Try
+        End If
         End If
     End Sub
 

@@ -104,10 +104,10 @@ Public Class FormSOManagamen
                 Toko = readerSO.Item("KdToko") & " - " & readerSO.Item("NamaToko")
                 txt_disc_faktur.Text = readerSO.Item("Disc")
                 StatusSO = readerSO.Item("StatusSO")
-                'If StatusSO <> 0 And StatusSO <> 1 Then
-                '    btnSave.Enabled = False
-                '    btnConfirms.Enabled = False
-                'End If
+                If StatusSO = 2 Then
+                    btnSave.Enabled = False
+                    btnConfirms.Enabled = False
+                End If
             End If
             readerSO.Close()
             cmbSales.Text = Sales
