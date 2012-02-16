@@ -110,3 +110,8 @@ E:\Project\OM ACU\Program Toko Acu.pdb
 E:\Project\OM ACU\Program Toko Acu.xml
 E:\Project\OM ACU\Program Toko Rio\obj\Release\Program_Toko_Acu.FormTrReturPembelianMKlemJadi.resources
 E:\Project\OM ACU\Program Toko Rio\obj\Release\Program_Toko_Acu.FormPurchasePaymentManagamenKlemJadi.resources
+E:\Project\OM ACU\Program Toko Rio\obj\Release\Program_Toko_Acu.FormProduksi.resources
+E:\Project\OM ACU\Program Toko Rio\obj\Release\Program_Toko_Acu.FormProduksiManagement.resources
+E:\Project\OM ACU\Program Toko Rio\obj\Release\Program_Toko_Acu.FormBrowseProduksiKeluar.resources
+E:\Project\OM ACU\Program Toko Rio\obj\Release\Program_Toko_Acu.FormProduksiDiterimaManagement.resources
+E:\Project\OM ACU\Program Toko Rio\obj\Release\Program_Toko_Acu.FormProduksiDiterima.resources

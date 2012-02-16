@@ -36,7 +36,7 @@ Partial Class FormMsFormula
         Me.Label5 = New System.Windows.Forms.Label
         Me.txtQtyPaku = New System.Windows.Forms.TextBox
         Me.cmbQtyPaku = New System.Windows.Forms.ComboBox
-        Me.Label4 = New System.Windows.Forms.Label
+        Me.lblSatuanKlemJadi = New System.Windows.Forms.Label
         Me.txtQtyKlemJadi = New System.Windows.Forms.TextBox
         Me.cmbUkuran = New System.Windows.Forms.ComboBox
         Me.Label2 = New System.Windows.Forms.Label
@@ -198,15 +198,15 @@ Partial Class FormMsFormula
         Me.cmbQtyPaku.Size = New System.Drawing.Size(53, 21)
         Me.cmbQtyPaku.TabIndex = 7
         '
-        'Label4
+        'lblSatuanKlemJadi
         '
-        Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(254, 249)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(57, 16)
-        Me.Label4.TabIndex = 580
-        Me.Label4.Text = "/ Karung"
+        Me.lblSatuanKlemJadi.AutoSize = True
+        Me.lblSatuanKlemJadi.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblSatuanKlemJadi.Location = New System.Drawing.Point(254, 249)
+        Me.lblSatuanKlemJadi.Name = "lblSatuanKlemJadi"
+        Me.lblSatuanKlemJadi.Size = New System.Drawing.Size(57, 16)
+        Me.lblSatuanKlemJadi.TabIndex = 580
+        Me.lblSatuanKlemJadi.Text = "/ Karung"
         '
         'txtQtyKlemJadi
         '
@@ -298,7 +298,7 @@ Partial Class FormMsFormula
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.txtQtyKlemMentah)
         Me.Controls.Add(Me.cmbQtyKlemMentah)
-        Me.Controls.Add(Me.Label4)
+        Me.Controls.Add(Me.lblSatuanKlemJadi)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label24)
         Me.Controls.Add(Me.main_tool_strip)
@@ -330,7 +330,7 @@ Partial Class FormMsFormula
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents txtQtyPaku As System.Windows.Forms.TextBox
     Friend WithEvents cmbQtyPaku As System.Windows.Forms.ComboBox
-    Friend WithEvents Label4 As System.Windows.Forms.Label
+    Friend WithEvents lblSatuanKlemJadi As System.Windows.Forms.Label
     Friend WithEvents txtQtyKlemJadi As System.Windows.Forms.TextBox
     Friend WithEvents cmbUkuran As System.Windows.Forms.ComboBox
     Friend WithEvents Label2 As System.Windows.Forms.Label

@@ -75,6 +75,7 @@ Public Class FormMsFormula
         cmbTipe.Items.Add("Pilih")
         cmbTipe.Items.Add("Pantek")
         cmbTipe.Items.Add("Hitung")
+        cmbTipe.Items.Add("Produksi")
     End Sub
 
     Private Sub FormMsMerk_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
@@ -197,6 +198,9 @@ Public Class FormMsFormula
 
     Private Sub cmbTipe_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbTipe.SelectedIndexChanged
         getContentForm()
+        If cmbTipe.Text = "Produksi" Or cmbTipe.Text = "Hitung" Then
+            lblSatuanKlemJadi.Text = "Pack"
+        End If
     End Sub
 
     Private Sub cmbUkuranPaku_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbUkuranPaku.SelectedIndexChanged

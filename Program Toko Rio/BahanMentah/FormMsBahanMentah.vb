@@ -75,23 +75,35 @@ Public Class FormMsBahanMentah
     End Sub
 
     Private Sub viewAllData(ByVal cr As String, ByVal opt As String)
-        sql = " select kdBahanMentah Kode,NamaBahanMentah Nama, Ukuran, Satuan, " & _
-              " ifnull(( Select StockAkhir from BahanMentahHistory where jenis ='" & jenis & "' " & _
-              " And KdBahanMentah = " & tab & ".KdBahanMentah " & _
-              " order by KdHistory desc limit 1 ),0) Stock, " & _
-              " ifnull(( Select DATE_FORMAT( TanggalHistory,'%d/%m/%Y') TanggalHistory " & _
-              " from BahanMentahHistory where jenis ='" & jenis & "' " & _
-              " And KdBahanMentah = " & tab & ".KdBahanMentah " & _
-              " order by KdHistory desc limit 1 ),'00/00/0000') `Tanggal Stok` , " & _
-              " format(ifnull(( Select harga " & _
-              " from msbahanmentahlist where jenis ='" & jenis & "' " & _
-              " And KdBahanMentah = " & tab & ".KdBahanMentah " & _
-              " order by  KdBahanMentahList  desc limit 1 ),0), 0) `Harga`,  " & _
-              " format(HargaJualKg, 0) HargaJualKg, format(HargaJualKarung, 0) HargaJualKarung, " & _
+        'sql = " select kdBahanMentah Kode,NamaBahanMentah Nama, Ukuran, Satuan, " & _
+        '      " ifnull(( Select StockAkhir from BahanMentahHistory where jenis ='" & jenis & "' " & _
+        '      " And KdBahanMentah = " & tab & ".KdBahanMentah " & _
+        '      " order by KdHistory desc limit 1 ),0) Stock, " & _
+        '      " ifnull(( Select DATE_FORMAT( TanggalHistory,'%d/%m/%Y') TanggalHistory " & _
+        '      " from BahanMentahHistory where jenis ='" & jenis & "' " & _
+        '      " And KdBahanMentah = " & tab & ".KdBahanMentah " & _
+        '      " order by KdHistory desc limit 1 ),'00/00/0000') `Tanggal Stok` , " & _
+        '      " format(ifnull(( Select harga " & _
+        '      " from msbahanmentahlist where jenis ='" & jenis & "' " & _
+        '      " And KdBahanMentah = " & tab & ".KdBahanMentah " & _
+        '      " order by  KdBahanMentahList  desc limit 1 ),0), 0) `Harga`,  " & _
+        '      " format(HargaJualKg, 0) HargaJualKg, format(HargaJualKarung, 0) HargaJualKarung, " & _
+        '      " KarungToKg " & _
+        '      "  " & _
+        '      " from  " & tab & _
+        '      " where isAktif='1' "
+        sql = " SELECT mbm.kdBahanMentah Kode,NamaBahanMentah Nama, Ukuran, Satuan, " & _
+              " IFNULL(SUM(mbml.Qty),0) Stock, " & _
+              " IFNULL(( SELECT DATE_FORMAT( TanggalHistory,'%d/%m/%Y') TanggalHistory " & _
+              " FROM BahanMentahHistory WHERE jenis ='" & jenis & "' " & _
+              " AND KdBahanMentah =  mbm.KdBahanMentah " & _
+              " ORDER BY KdHistory DESC LIMIT 1 ),'00/00/0000') `Tanggal Stok` , " & _
+              " FORMAT(IFNULL(mbml.Harga,0), 0) `Harga`, " & _
+              " FORMAT(HargaJualKg, 0) HargaJualKg, FORMAT(HargaJualKarung, 0) HargaJualKarung, " & _
               " KarungToKg " & _
-              "  " & _
-              " from  " & tab & _
-              " where isAktif='1' "
+              " FROM  MsBahanMentah mbm " & _
+              " LEFT JOIN msbahanmentahlist mbml ON mbml.KdBahanMentah = mbm.KdBahanMentah " & _
+              " WHERE isAktif='1' "
         If opt <> "" Then
             Dim col As String = ""
             If opt = "Ukuran" Then
@@ -101,8 +113,9 @@ Public Class FormMsBahanMentah
             End If
             sql &= "  AND " & col & "  like '%" & cr & "%'  "
         End If
-        sql &= "  AND jenis='" & jenis & "'"
-        sql &= " Order by kdBahanMentah desc "
+        sql &= " AND mbm.jenis = '" & jenis & "' " & _
+               " GROUP BY mbm.KdBahanMentah " & _
+               " ORDER BY mbml.KdBahanMentahList, NamaBahanMentah "
         DataGridView1.DataSource = execute_datatable(sql)
         setData()
 

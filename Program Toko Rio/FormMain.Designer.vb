@@ -19,8 +19,8 @@ Partial Class FormMain
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormMain))
         Dim btn_dashboard As System.Windows.Forms.ToolStripButton
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormMain))
         Me.main_menu_strip = New System.Windows.Forms.MenuStrip
         Me.MasterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.ToolStripMenuItem5 = New System.Windows.Forms.ToolStripMenuItem
@@ -75,6 +75,9 @@ Partial Class FormMain
         Me.HitungKlemToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem
         Me.KlemKeluarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.KlemDiterimaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.KlemJadiToolStripMenuItem9 = New System.Windows.Forms.ToolStripMenuItem
+        Me.KeluarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.MasukToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.PenggajianToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.ReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.ToolStripMenuItemPurchase = New System.Windows.Forms.ToolStripMenuItem
@@ -98,9 +101,6 @@ Partial Class FormMain
         Me.BackupDataToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.RegisterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.main_tool_strip = New System.Windows.Forms.ToolStrip
-        Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator
-        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator
-        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator
         Me.btn_purchase = New System.Windows.Forms.ToolStripDropDownButton
         Me.PurchaseOrderToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem
         Me.KlemMentahToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
@@ -117,6 +117,9 @@ Partial Class FormMain
         Me.PurchasePaymentToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem
         Me.KlemMentahToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem
         Me.PakuToolStripMenuItem7 = New System.Windows.Forms.ToolStripMenuItem
+        Me.KlemJadiToolStripMenuItem8 = New System.Windows.Forms.ToolStripMenuItem
+        Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator
         Me.btn_sales = New System.Windows.Forms.ToolStripDropDownButton
         Me.SalesOrderToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem
         Me.KlemJadiToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
@@ -132,12 +135,25 @@ Partial Class FormMain
         Me.BayarPerTokoToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem
         Me.PakuToolStripMenuItem9 = New System.Windows.Forms.ToolStripMenuItem
         Me.BayarPerTanggalToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator
         Me.btn_logout = New System.Windows.Forms.ToolStripButton
-        Me.KlemJadiToolStripMenuItem8 = New System.Windows.Forms.ToolStripMenuItem
         btn_dashboard = New System.Windows.Forms.ToolStripButton
         Me.main_menu_strip.SuspendLayout()
         Me.main_tool_strip.SuspendLayout()
         Me.SuspendLayout()
+        '
+        'btn_dashboard
+        '
+        btn_dashboard.Image = CType(resources.GetObject("btn_dashboard.Image"), System.Drawing.Image)
+        btn_dashboard.ImageTransparentColor = System.Drawing.Color.Magenta
+        btn_dashboard.MergeIndex = 0
+        btn_dashboard.Name = "btn_dashboard"
+        btn_dashboard.Padding = New System.Windows.Forms.Padding(5)
+        btn_dashboard.Size = New System.Drawing.Size(81, 61)
+        btn_dashboard.Text = "Bonus Sales"
+        btn_dashboard.TextDirection = System.Windows.Forms.ToolStripTextDirection.Horizontal
+        btn_dashboard.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
+        AddHandler btn_dashboard.Click, AddressOf Me.btn_dashboard_Click
         '
         'main_menu_strip
         '
@@ -444,7 +460,7 @@ Partial Class FormMain
         '
         'ProduksiBarangJadiToolStripMenuItem
         '
-        Me.ProduksiBarangJadiToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PantekKlemToolStripMenuItem, Me.HitungKlemToolStripMenuItem1})
+        Me.ProduksiBarangJadiToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PantekKlemToolStripMenuItem, Me.HitungKlemToolStripMenuItem1, Me.KlemJadiToolStripMenuItem9})
         Me.ProduksiBarangJadiToolStripMenuItem.Name = "ProduksiBarangJadiToolStripMenuItem"
         Me.ProduksiBarangJadiToolStripMenuItem.Size = New System.Drawing.Size(166, 22)
         Me.ProduksiBarangJadiToolStripMenuItem.Text = "Produksi"
@@ -453,7 +469,7 @@ Partial Class FormMain
         '
         Me.PantekKlemToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BarangKeluarToolStripMenuItem, Me.BarangDiterrimaToolStripMenuItem})
         Me.PantekKlemToolStripMenuItem.Name = "PantekKlemToolStripMenuItem"
-        Me.PantekKlemToolStripMenuItem.Size = New System.Drawing.Size(141, 22)
+        Me.PantekKlemToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.PantekKlemToolStripMenuItem.Text = "Pantek Klem"
         '
         'BarangKeluarToolStripMenuItem
@@ -472,7 +488,7 @@ Partial Class FormMain
         '
         Me.HitungKlemToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.KlemKeluarToolStripMenuItem, Me.KlemDiterimaToolStripMenuItem})
         Me.HitungKlemToolStripMenuItem1.Name = "HitungKlemToolStripMenuItem1"
-        Me.HitungKlemToolStripMenuItem1.Size = New System.Drawing.Size(141, 22)
+        Me.HitungKlemToolStripMenuItem1.Size = New System.Drawing.Size(152, 22)
         Me.HitungKlemToolStripMenuItem1.Text = "Hitung Klem"
         '
         'KlemKeluarToolStripMenuItem
@@ -486,6 +502,25 @@ Partial Class FormMain
         Me.KlemDiterimaToolStripMenuItem.Name = "KlemDiterimaToolStripMenuItem"
         Me.KlemDiterimaToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
         Me.KlemDiterimaToolStripMenuItem.Text = "Klem Diterima"
+        '
+        'KlemJadiToolStripMenuItem9
+        '
+        Me.KlemJadiToolStripMenuItem9.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.KeluarToolStripMenuItem, Me.MasukToolStripMenuItem})
+        Me.KlemJadiToolStripMenuItem9.Name = "KlemJadiToolStripMenuItem9"
+        Me.KlemJadiToolStripMenuItem9.Size = New System.Drawing.Size(152, 22)
+        Me.KlemJadiToolStripMenuItem9.Text = "Klem Jadi"
+        '
+        'KeluarToolStripMenuItem
+        '
+        Me.KeluarToolStripMenuItem.Name = "KeluarToolStripMenuItem"
+        Me.KeluarToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.KeluarToolStripMenuItem.Text = "Keluar"
+        '
+        'MasukToolStripMenuItem
+        '
+        Me.MasukToolStripMenuItem.Name = "MasukToolStripMenuItem"
+        Me.MasukToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.MasukToolStripMenuItem.Text = "Masuk"
         '
         'PenggajianToolStripMenuItem
         '
@@ -642,21 +677,6 @@ Partial Class FormMain
         Me.main_tool_strip.TabIndex = 4
         Me.main_tool_strip.Text = "Tool Strip"
         '
-        'ToolStripSeparator3
-        '
-        Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
-        Me.ToolStripSeparator3.Size = New System.Drawing.Size(81, 6)
-        '
-        'ToolStripSeparator1
-        '
-        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(81, 6)
-        '
-        'ToolStripSeparator2
-        '
-        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(81, 6)
-        '
         'btn_purchase
         '
         Me.btn_purchase.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PurchaseOrderToolStripMenuItem2, Me.PurchaseReturnToolStripMenuItem1, Me.ToolStripMenuItem2, Me.PurchasePaymentToolStripMenuItem1})
@@ -672,7 +692,7 @@ Partial Class FormMain
         Me.PurchaseOrderToolStripMenuItem2.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.KlemMentahToolStripMenuItem, Me.PakuToolStripMenuItem4, Me.KlemJadiToolStripMenuItem5})
         Me.PurchaseOrderToolStripMenuItem2.Image = CType(resources.GetObject("PurchaseOrderToolStripMenuItem2.Image"), System.Drawing.Image)
         Me.PurchaseOrderToolStripMenuItem2.Name = "PurchaseOrderToolStripMenuItem2"
-        Me.PurchaseOrderToolStripMenuItem2.Size = New System.Drawing.Size(193, 38)
+        Me.PurchaseOrderToolStripMenuItem2.Size = New System.Drawing.Size(177, 22)
         Me.PurchaseOrderToolStripMenuItem2.Text = "Pnerimaan Barang"
         '
         'KlemMentahToolStripMenuItem
@@ -698,7 +718,7 @@ Partial Class FormMain
         Me.PurchaseReturnToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.KlemToolStripMenuItem1, Me.PakuToolStripMenuItem5, Me.KlemJadiToolStripMenuItem6})
         Me.PurchaseReturnToolStripMenuItem1.Image = CType(resources.GetObject("PurchaseReturnToolStripMenuItem1.Image"), System.Drawing.Image)
         Me.PurchaseReturnToolStripMenuItem1.Name = "PurchaseReturnToolStripMenuItem1"
-        Me.PurchaseReturnToolStripMenuItem1.Size = New System.Drawing.Size(193, 38)
+        Me.PurchaseReturnToolStripMenuItem1.Size = New System.Drawing.Size(177, 22)
         Me.PurchaseReturnToolStripMenuItem1.Text = "Penerimaan Barang"
         Me.PurchaseReturnToolStripMenuItem1.Visible = False
         '
@@ -725,25 +745,25 @@ Partial Class FormMain
         Me.ToolStripMenuItem2.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.KlemMentahToolStripMenuItem1, Me.PakuToolStripMenuItem6, Me.KlemJadiToolStripMenuItem7})
         Me.ToolStripMenuItem2.Image = CType(resources.GetObject("ToolStripMenuItem2.Image"), System.Drawing.Image)
         Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
-        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(193, 38)
+        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(177, 22)
         Me.ToolStripMenuItem2.Text = "Retur"
         '
         'KlemMentahToolStripMenuItem1
         '
         Me.KlemMentahToolStripMenuItem1.Name = "KlemMentahToolStripMenuItem1"
-        Me.KlemMentahToolStripMenuItem1.Size = New System.Drawing.Size(152, 22)
+        Me.KlemMentahToolStripMenuItem1.Size = New System.Drawing.Size(145, 22)
         Me.KlemMentahToolStripMenuItem1.Text = "Klem Mentah"
         '
         'PakuToolStripMenuItem6
         '
         Me.PakuToolStripMenuItem6.Name = "PakuToolStripMenuItem6"
-        Me.PakuToolStripMenuItem6.Size = New System.Drawing.Size(152, 22)
+        Me.PakuToolStripMenuItem6.Size = New System.Drawing.Size(145, 22)
         Me.PakuToolStripMenuItem6.Text = "Paku"
         '
         'KlemJadiToolStripMenuItem7
         '
         Me.KlemJadiToolStripMenuItem7.Name = "KlemJadiToolStripMenuItem7"
-        Me.KlemJadiToolStripMenuItem7.Size = New System.Drawing.Size(152, 22)
+        Me.KlemJadiToolStripMenuItem7.Size = New System.Drawing.Size(145, 22)
         Me.KlemJadiToolStripMenuItem7.Text = "Klem Jadi"
         '
         'PurchasePaymentToolStripMenuItem1
@@ -751,33 +771,36 @@ Partial Class FormMain
         Me.PurchasePaymentToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.KlemMentahToolStripMenuItem2, Me.PakuToolStripMenuItem7, Me.KlemJadiToolStripMenuItem8})
         Me.PurchasePaymentToolStripMenuItem1.Image = CType(resources.GetObject("PurchasePaymentToolStripMenuItem1.Image"), System.Drawing.Image)
         Me.PurchasePaymentToolStripMenuItem1.Name = "PurchasePaymentToolStripMenuItem1"
-        Me.PurchasePaymentToolStripMenuItem1.Size = New System.Drawing.Size(193, 38)
+        Me.PurchasePaymentToolStripMenuItem1.Size = New System.Drawing.Size(177, 22)
         Me.PurchasePaymentToolStripMenuItem1.Text = "Purchase Payment"
         '
         'KlemMentahToolStripMenuItem2
         '
         Me.KlemMentahToolStripMenuItem2.Name = "KlemMentahToolStripMenuItem2"
-        Me.KlemMentahToolStripMenuItem2.Size = New System.Drawing.Size(152, 22)
+        Me.KlemMentahToolStripMenuItem2.Size = New System.Drawing.Size(145, 22)
         Me.KlemMentahToolStripMenuItem2.Text = "Klem Mentah"
         '
         'PakuToolStripMenuItem7
         '
         Me.PakuToolStripMenuItem7.Name = "PakuToolStripMenuItem7"
-        Me.PakuToolStripMenuItem7.Size = New System.Drawing.Size(152, 22)
+        Me.PakuToolStripMenuItem7.Size = New System.Drawing.Size(145, 22)
         Me.PakuToolStripMenuItem7.Text = "Paku"
         '
-        'btn_dashboard
+        'KlemJadiToolStripMenuItem8
         '
-        btn_dashboard.Image = CType(resources.GetObject("btn_dashboard.Image"), System.Drawing.Image)
-        btn_dashboard.ImageTransparentColor = System.Drawing.Color.Magenta
-        btn_dashboard.MergeIndex = 0
-        btn_dashboard.Name = "btn_dashboard"
-        btn_dashboard.Padding = New System.Windows.Forms.Padding(5)
-        btn_dashboard.Size = New System.Drawing.Size(81, 61)
-        btn_dashboard.Text = "Bonus Sales"
-        btn_dashboard.TextDirection = System.Windows.Forms.ToolStripTextDirection.Horizontal
-        btn_dashboard.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-        AddHandler btn_dashboard.Click, AddressOf Me.btn_dashboard_Click
+        Me.KlemJadiToolStripMenuItem8.Name = "KlemJadiToolStripMenuItem8"
+        Me.KlemJadiToolStripMenuItem8.Size = New System.Drawing.Size(145, 22)
+        Me.KlemJadiToolStripMenuItem8.Text = "Klem Jadi"
+        '
+        'ToolStripSeparator3
+        '
+        Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(81, 6)
+        '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(81, 6)
         '
         'btn_sales
         '
@@ -882,6 +905,11 @@ Partial Class FormMain
         Me.BayarPerTanggalToolStripMenuItem.Size = New System.Drawing.Size(169, 22)
         Me.BayarPerTanggalToolStripMenuItem.Text = "Bayar Per Tanggal"
         '
+        'ToolStripSeparator2
+        '
+        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(81, 6)
+        '
         'btn_logout
         '
         Me.btn_logout.Image = CType(resources.GetObject("btn_logout.Image"), System.Drawing.Image)
@@ -890,12 +918,6 @@ Partial Class FormMain
         Me.btn_logout.Size = New System.Drawing.Size(81, 51)
         Me.btn_logout.Text = "Log Out"
         Me.btn_logout.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-        '
-        'KlemJadiToolStripMenuItem8
-        '
-        Me.KlemJadiToolStripMenuItem8.Name = "KlemJadiToolStripMenuItem8"
-        Me.KlemJadiToolStripMenuItem8.Size = New System.Drawing.Size(152, 22)
-        Me.KlemJadiToolStripMenuItem8.Text = "Klem Jadi"
         '
         'FormMain
         '
@@ -1033,4 +1055,7 @@ Partial Class FormMain
     Friend WithEvents KlemJadiToolStripMenuItem6 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents KlemJadiToolStripMenuItem7 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents KlemJadiToolStripMenuItem8 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents KlemJadiToolStripMenuItem9 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents KeluarToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MasukToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 End Class

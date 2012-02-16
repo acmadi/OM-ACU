@@ -414,4 +414,12 @@ Public Class FormMain
     Private Sub KlemJadiToolStripMenuItem8_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles KlemJadiToolStripMenuItem8.Click
         open_page("FormPurchasePayment", "klem_jadi")
     End Sub
+
+    Private Sub KeluarToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles KeluarToolStripMenuItem.Click
+        open_page("FormProduksi")
+    End Sub
+
+    Private Sub MasukToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MasukToolStripMenuItem.Click
+        open_page("FormProduksiDiterima")
+    End Sub
 End Class

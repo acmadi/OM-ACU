@@ -91,6 +91,12 @@
     <Compile Include="BahanMentah\FormMsPaku.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Browse\FormBrowseProduksiKeluar.designer.vb">
+      <DependentUpon>FormBrowseProduksiKeluar.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Browse\FormBrowseProduksiKeluar.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Browse\FormBrowseHitungKeluar.designer.vb">
       <DependentUpon>FormBrowseHitungKeluar.vb</DependentUpon>
     </Compile>
@@ -359,6 +365,30 @@
       <DependentUpon>FormTrPO.vb</DependentUpon>
     </Compile>
     <Compile Include="Pembelian\FormTrPO.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Penggajian\FormProduksiDiterimaManagement.Designer.vb">
+      <DependentUpon>FormProduksiDiterimaManagement.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Penggajian\FormProduksiDiterimaManagement.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Penggajian\FormProduksiDiterima.designer.vb">
+      <DependentUpon>FormProduksiDiterima.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Penggajian\FormProduksiDiterima.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Penggajian\FormProduksi.designer.vb">
+      <DependentUpon>FormProduksi.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Penggajian\FormProduksi.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Penggajian\FormProduksiManagement.Designer.vb">
+      <DependentUpon>FormProduksiManagement.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Penggajian\FormProduksiManagement.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Penggajian\FormProduksiHitungDiterimaManagement.Designer.vb">
@@ -728,6 +758,10 @@
       <SubType>Designer</SubType>
       <DependentUpon>FormMsPaku.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Browse\FormBrowseProduksiKeluar.resx">
+      <DependentUpon>FormBrowseProduksiKeluar.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Browse\FormBrowseHitungKeluar.resx">
       <DependentUpon>FormBrowseHitungKeluar.vb</DependentUpon>
       <SubType>Designer</SubType>
@@ -958,6 +992,22 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Pembelian\FormTrPO.resx">
       <DependentUpon>FormTrPO.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Penggajian\FormProduksiDiterimaManagement.resx">
+      <DependentUpon>FormProduksiDiterimaManagement.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Penggajian\FormProduksiDiterima.resx">
+      <DependentUpon>FormProduksiDiterima.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Penggajian\FormProduksi.resx">
+      <DependentUpon>FormProduksi.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Penggajian\FormProduksiManagement.resx">
+      <DependentUpon>FormProduksiManagement.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Penggajian\FormProduksiHitungDiterimaManagement.resx">

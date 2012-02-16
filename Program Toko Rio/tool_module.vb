@@ -280,6 +280,16 @@ Module tool_module
             form.MdiParent = FormMain
             form.Show()
             opened_page = "FormPenggajian"
+        ElseIf page_to_open = "FormProduksi" Then
+            form = New FormProduksi
+            form.MdiParent = FormMain
+            form.Show()
+            opened_page = "FormProduksi"
+        ElseIf page_to_open = "FormProduksiDiterima" Then
+            form = New FormProduksiDiterima
+            form.MdiParent = FormMain
+            form.Show()
+            opened_page = "FormProduksiDiterima"
         End If
         Return True
     End Function
@@ -566,6 +576,18 @@ Module tool_module
             sub_form = ""
         ElseIf subpage_to_open = "FormPenggajianManagement" Then
             sub_form = New FormPenggajianManagement
+            data_carier(0) = detail_id
+            sub_form.ShowDialog(FormMain)
+            data_carier(0) = ""
+            sub_form = ""
+        ElseIf subpage_to_open = "FormProduksiManagement" Then
+            sub_form = New FormProduksiManagement
+            data_carier(0) = detail_id
+            sub_form.ShowDialog(FormMain)
+            data_carier(0) = ""
+            sub_form = ""
+        ElseIf subpage_to_open = "FormProduksiDiterimaManagement" Then
+            sub_form = New FormProduksiDiterimaManagement
             data_carier(0) = detail_id
             sub_form.ShowDialog(FormMain)
             data_carier(0) = ""

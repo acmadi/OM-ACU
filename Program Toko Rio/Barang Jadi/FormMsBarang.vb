@@ -67,16 +67,26 @@ Public Class FormMsBarang
     End Sub
 
     Private Sub viewAllData(ByVal cr As String, ByVal opt As String)
-        sql = " select kdBarang Kode,NamaBarang Nama, Ukuran,Satuan,msbarang.KdMerk,Merk, " & _
-              " ifnull(( Select StockAkhir from BarangHistory where kdBarang = " & tab & ".KdBarang " & _
-              " order by KdBarangHistory desc limit 1 ),0) Stock, " & _
-              " ifnull(( Select DATE_FORMAT( TanggalHistory,'%d/%m/%Y') TanggalHistory " & _
-              " from BarangHistory where kdBarang = " & tab & ".KdBarang " & _
-              " order by KdBarangHistory desc limit 1 ),'00/00/0000') `Tanggal Stok`, " & _
-              " Format(HargaList,0) as 'Harga Jual' " & _
-              " from  " & tab & _
-              " Join MsMerk On MsMerk.KdMerk = " & tab & ".KdMerk " & _
-              " where isAktif='1' "
+        'sql = " select kdBarang Kode,NamaBarang Nama, Ukuran,Satuan,msbarang.KdMerk,Merk, " & _
+        '      " ifnull(( Select StockAkhir from BarangHistory where kdBarang = " & tab & ".KdBarang " & _
+        '      " order by KdBarangHistory desc limit 1 ),0) Stock, " & _
+        '      " ifnull(( Select DATE_FORMAT( TanggalHistory,'%d/%m/%Y') TanggalHistory " & _
+        '      " from BarangHistory where kdBarang = " & tab & ".KdBarang " & _
+        '      " order by KdBarangHistory desc limit 1 ),'00/00/0000') `Tanggal Stok`, " & _
+        '      " Format(HargaList,0) as 'Harga Jual' " & _
+        '      " from  " & tab & _
+        '      " Join MsMerk On MsMerk.KdMerk = " & tab & ".KdMerk " & _
+        '      " where isAktif='1' "
+        sql = " SELECT mb.kdBarang Kode, NamaBarang Nama, Ukuran,Satuan, mb.KdMerk, Merk, " & _
+              " IFNULL(SUM(mbl.Qty),0) Stock, " & _
+              " IFNULL(( SELECT DATE_FORMAT( TanggalHistory,'%d/%m/%Y') TanggalHistory " & _
+              " FROM BarangHistory WHERE kdBarang =  mb.KdBarang " & _
+              " ORDER BY KdBarangHistory DESC LIMIT 1 ),'00/00/0000') `Tanggal Stok`, " & _
+              " FORMAT(HargaList,0) AS 'Harga Jual' " & _
+              " FROM  MsBarang mb " & _
+              " JOIN MsMerk ON MsMerk.KdMerk =  mb.KdMerk " & _
+              " LEFT JOIN msbaranglist mbl ON mbl.KdBarang = mb.KdBarang " & _
+              " WHERE isAktif='1' "
         If opt <> "" Then
             Dim col As String = ""
             If opt = "Ukuran" Then
@@ -85,7 +95,8 @@ Public Class FormMsBarang
             sql &= "  AND " & col & "  like '%" & cr & "%'  "
         End If
 
-        sql &= " Order by kdBarang desc "
+        sql &= " GROUP BY mb.KdBarang " & _
+               " ORDER BY NamaBarang "
         DataGridView1.DataSource = execute_datatable(sql)
         If DataGridView1.RowCount > 0 Then
             setData()

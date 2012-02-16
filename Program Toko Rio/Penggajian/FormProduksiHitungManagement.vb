@@ -590,4 +590,8 @@ Public Class FormProduksiHitungManagement
             btnAdd_Click(Nothing, Nothing)
         End If
     End Sub
+
+    Private Sub txtQtyKlemJadi_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtQtyKlemJadi.TextChanged
+
+    End Sub
 End Class
