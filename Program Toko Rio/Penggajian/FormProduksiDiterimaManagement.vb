@@ -563,10 +563,10 @@ Public Class FormProduksiDiterimaManagement
                 MsgBox("Jumlah klem harus lebih besar dari 0", MsgBoxStyle.Information, "Validation Error")
                 qtyKlem = 1
                 gridKlemJadi.CurrentRow.Cells("clmQtyKlemJadi").Selected = True
-            ElseIf Val(HargaModal) <= 0 Then
-                MsgBox("Harga modal klem harus lebih besar dari 0", MsgBoxStyle.Information, "Validation Error")
-                HargaModal = 1
-                gridKlemJadi.CurrentRow.Cells("clmHargaModalKlemJadi").Selected = True
+                'ElseIf Val(HargaModal) <= 0 Then
+                '    MsgBox("Harga modal klem harus lebih besar dari 0", MsgBoxStyle.Information, "Validation Error")
+                '    HargaModal = 1
+                '    gridKlemJadi.CurrentRow.Cells("clmHargaModalKlemJadi").Selected = True
             End If
 
             If KdMerkPrioritas <> CurrKdMerk Then
